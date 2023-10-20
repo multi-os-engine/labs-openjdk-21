@@ -1,13 +1,13 @@
 # https://github.com/graalvm/labs-openjdk-21/blob/master/doc/testing.md
 local run_test_spec = "test/hotspot/jtreg/compiler/jvmci test/jdk/tools/jlink/plugins/SaveJlinkArgfilesPluginTest.java";
 
-local labsjdk_builder_version = "8928c95fac6928559341b784233d0f1b985a3a4f";
+local labsjdk_builder_version = "bcdc3fc82760543571fac7c1c35452dbb2ce6b9b";
 
 # Returns true if `str` contains `needle` as a substring.
 local contains(str, needle) = std.findSubstr(needle, str) != [];
 
 {
-    overlay: "9aaf850438f4551337c76b9133b700c23abfd739",
+    overlay: "087852016f367deb24c7d893052ab48e04e698c1",
     specVersion: "3",
 
     mxDependencies:: {
@@ -29,7 +29,8 @@ local contains(str, needle) = std.findSubstr(needle, str) != [];
             JIB_PATH: "${PATH}",
             MAKE : "make",
             ZLIB_BUNDLING: "system",
-            MX_PYTHON: "python3.8"
+            MX_PYTHON: "python3.8",
+            JVMCI_VERSION_CHECK: "ignore"
         },
     },
 
@@ -243,13 +244,13 @@ local contains(str, needle) = std.findSubstr(needle, str) != [];
     # Downstream Graal branch to test against. If you change this value to anything but
     # "master", you must create an ol-jira issue to change it back to master once the
     # next JVMCI release has been made. Add the issue id as a comment here.
-    local downstream_branch = "master",
+    local downstream_branch = "me/ignore_jvmci_vesion_check",
 
     local clone_graal(defs) = {
         # Checkout the graal-enterprise repo to the "_gate" version of the
         # named downstream branch. This ensures the graal-enterprise and
         # graal repos will be in sync.
-        local branch = if downstream_branch == "master" then "master" else downstream_branch + "_gate",
+        local branch = if downstream_branch == "cpu/graal-vm/23.1" then "cpu/graal-vm/23.1" else downstream_branch + "_gate",
 
         run+: [
             ["git", "clone", defs.graal_enterprise_url],
