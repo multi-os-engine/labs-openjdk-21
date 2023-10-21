@@ -29,8 +29,7 @@ local contains(str, needle) = std.findSubstr(needle, str) != [];
             JIB_PATH: "${PATH}",
             MAKE : "make",
             ZLIB_BUNDLING: "system",
-            MX_PYTHON: "python3.8",
-            JVMCI_VERSION_CHECK: "ignore"
+            MX_PYTHON: "python3.8"
         },
     },
 
