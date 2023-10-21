@@ -1,13 +1,13 @@
 # https://github.com/graalvm/labs-openjdk-21/blob/master/doc/testing.md
 local run_test_spec = "test/hotspot/jtreg/compiler/jvmci test/jdk/tools/jlink/plugins/SaveJlinkArgfilesPluginTest.java";
 
-local labsjdk_builder_version = "bcdc3fc82760543571fac7c1c35452dbb2ce6b9b";
+local labsjdk_builder_version = "181ae3a6077f9bf0a117cc34562c33e871cd4ede";
 
 # Returns true if `str` contains `needle` as a substring.
 local contains(str, needle) = std.findSubstr(needle, str) != [];
 
 {
-    overlay: "087852016f367deb24c7d893052ab48e04e698c1",
+    overlay: "616937561244a0b2c6ff8e001b11b4e304a85a8a",
     specVersion: "3",
 
     mxDependencies:: {
@@ -29,8 +29,7 @@ local contains(str, needle) = std.findSubstr(needle, str) != [];
             JIB_PATH: "${PATH}",
             MAKE : "make",
             ZLIB_BUNDLING: "system",
-            MX_PYTHON: "python3.8",
-            JVMCI_VERSION_CHECK: "ignore"
+            MX_PYTHON: "python3.8"
         },
     },
 
@@ -244,7 +243,7 @@ local contains(str, needle) = std.findSubstr(needle, str) != [];
     # Downstream Graal branch to test against. If you change this value to anything but
     # "master", you must create an ol-jira issue to change it back to master once the
     # next JVMCI release has been made. Add the issue id as a comment here.
-    local downstream_branch = "me/ignore_jvmci_vesion_check",
+    local downstream_branch = "cpu/graal-vm/23.1",
 
     local clone_graal(defs) = {
         # Checkout the graal-enterprise repo to the "_gate" version of the
